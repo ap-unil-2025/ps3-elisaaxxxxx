@@ -1,0 +1,9 @@
+a7d7058 | 2025-10-05 | Elisa Querry | 5th time
+f9c0262 | 2025-10-05 | Elisa Querry | problem solved 4th time
+90407e9 | 2025-10-05 | Elisa Querry | problem solved for the 2de time
+f1929d0 | 2025-10-05 | Elisa Querry | problem solved
+ebcc584 | 2025-10-05 | Elisa Querry | problem solved
+aecab90 | 2025-10-03 | Elisa Querry | problem solved
+4b28fec | 2025-09-29 | Elisa Querry | Add my name and date
+7bcb689 | 2025-09-29 | Anna Smirnova | Add GitHub Classroom autograding configuration
+2dc2daa | 2025-09-29 | github-classroom[bot] | Initial commit
