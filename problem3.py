@@ -20,10 +20,29 @@ def get_numbers_from_user():
         # TODO: Handle invalid input gracefully
         pass
 
-    return numbers
+def get_numbers_from_user():
+    """
+    Get numbers from user until they type 'done'.
+    Return a list of numbers.
+    """
+    values = []   
+
+    while True:
+        guest_input = input("Enter a value (type 'done' to finish): ")
+
+        if guest_input.lower() == "done":
+            break   
+
+        try:
+            number = float(guest_input)   
+            values.append(number)         
+        except ValueError:
+            print("Enter a valid number")
+
+    return values
 
 
-def analyze_numbers(numbers):
+
     """
     Analyze the list and return a dictionary with:
     - count: number of elements
@@ -55,6 +74,29 @@ def analyze_numbers(numbers):
 
     return analysis
 
+def analyze_numbers(numbers):
+    """Take a list of numbers and return summary statistics in a dictionary."""
+    if not numbers:
+        return None
+
+    n = len(numbers)
+    total = sum(numbers)
+    avg = total / n
+    mn = min(numbers)
+    mx = max(numbers)
+    even_count = sum(1 for x in numbers if x.is_integer() and int(x) % 2 == 0)
+    odd_count  = sum(1 for x in numbers if x.is_integer() and int(x) % 2 != 0)
+
+    return {
+        "count": n,
+        "sum": total,
+        "average": avg,
+        "min": mn,
+        "max": mx,
+        "even_count": even_count,
+        "odd_count": odd_count,
+    }
+
 
 def display_analysis(analysis):
     """
@@ -77,6 +119,14 @@ def display_analysis(analysis):
     # etc.
     pass
 
+nums = get_numbers_from_user()        
+stats = analyze_numbers(nums)         
+
+print("\nNumbers entered:", nums)     
+print("\nAnalysis Results:")
+for key, value in stats.items():
+    print(f"- {key}: {value}")
+    
 
 def main():
     """Main function to run the number analyzer."""
