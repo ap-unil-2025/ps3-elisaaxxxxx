@@ -25,20 +25,16 @@ def get_numbers_from_user():
     Get numbers from user until they type 'done'.
     Return a list of numbers.
     """
-    values = []   
-
+    values = []
     while True:
         guest_input = input("Enter a value (type 'done' to finish): ")
-
         if guest_input.lower() == "done":
-            break   
-
+            break
         try:
-            number = float(guest_input)   
-            values.append(number)         
+            number = float(guest_input)
+            values.append(number)
         except ValueError:
             print("Enter a valid number")
-
     return values
 
 
@@ -75,17 +71,30 @@ def get_numbers_from_user():
     return analysis
 
 def analyze_numbers(numbers):
-    """Take a list of numbers and return summary statistics in a dictionary."""
+    """
+    Analyze a list of numbers and return a dict with stats.
+    Pure function: no input() / print() here.
+    """
     if not numbers:
-        return None
+        return {
+            "count": 0,
+            "sum": 0.0,
+            "average": 0.0,
+            "min": None,
+            "max": None,
+            "even_count": 0,
+            "odd_count": 0,
+        }
 
     n = len(numbers)
     total = sum(numbers)
     avg = total / n
     mn = min(numbers)
     mx = max(numbers)
-    even_count = sum(1 for x in numbers if x.is_integer() and int(x) % 2 == 0)
-    odd_count  = sum(1 for x in numbers if x.is_integer() and int(x) % 2 != 0)
+
+    # Compter pair/impair UNIQUEMENT pour les valeurs entières
+    even_count = sum(1 for x in numbers if float(x).is_integer() and int(x) % 2 == 0)
+    odd_count  = sum(1 for x in numbers if float(x).is_integer() and int(x) % 2 != 0)
 
     return {
         "count": n,
@@ -98,18 +107,14 @@ def analyze_numbers(numbers):
     }
 
 
-def display_analysis(analysis):
-    """
-    Display the analysis in a formatted way.
+if __name__ == "__main__":
+    nums = get_numbers_from_user()
+    stats = analyze_numbers(nums)
 
-    Args:
-        analysis (dict): Dictionary containing analysis results
-    """
-    if not analysis:
-        return
-
+    print("\nNumbers entered:", nums)
     print("\nAnalysis Results:")
-    print("-" * 20)
+    for k, v in stats.items():
+        print(f"- {k}: {v}")
 
     # TODO: Display all analysis results in a nice format
     # Example:
@@ -118,35 +123,3 @@ def display_analysis(analysis):
     # Average: 5.00
     # etc.
     pass
-
-nums = get_numbers_from_user()        
-stats = analyze_numbers(nums)         
-
-print("\nNumbers entered:", nums)     
-print("\nAnalysis Results:")
-for key, value in stats.items():
-    print(f"- {key}: {value}")
-    
-
-def main():
-    """Main function to run the number analyzer."""
-    print("Number Analyzer")
-    print("Enter numbers one at a time. Type 'done' when finished.")
-    print()
-
-    # Get numbers from user
-    numbers = get_numbers_from_user()
-
-    if not numbers:
-        print("No numbers entered!")
-        return
-
-    # Analyze the numbers
-    analysis = analyze_numbers(numbers)
-
-    # Display the results
-    display_analysis(analysis)
-
-
-if __name__ == "__main__":
-    main()
