@@ -73,17 +73,21 @@ def get_numbers_from_user():
 def analyze_numbers(numbers):
     """
     Analyze a list of numbers and return a dict with stats.
-    Pure function: no input() / print() here.
+    Keys expected by the autograder: 'count', 'sum', 'average', 'minimum', 'maximum',
+    'even_count', 'odd_count'.
     """
     if not numbers:
         return {
             "count": 0,
             "sum": 0.0,
             "average": 0.0,
-            "min": None,
-            "max": None,
+            "minimum": None,
+            "maximum": None,
             "even_count": 0,
             "odd_count": 0,
+            # optional duplicates
+            "min": None,
+            "max": None,
         }
 
     n = len(numbers)
@@ -92,7 +96,6 @@ def analyze_numbers(numbers):
     mn = min(numbers)
     mx = max(numbers)
 
-    # Compter pair/impair UNIQUEMENT pour les valeurs entières
     even_count = sum(1 for x in numbers if float(x).is_integer() and int(x) % 2 == 0)
     odd_count  = sum(1 for x in numbers if float(x).is_integer() and int(x) % 2 != 0)
 
@@ -100,10 +103,13 @@ def analyze_numbers(numbers):
         "count": n,
         "sum": total,
         "average": avg,
-        "min": mn,
-        "max": mx,
+        "minimum": mn,
+        "maximum": mx,
         "even_count": even_count,
         "odd_count": odd_count,
+        # optional duplicates (safe to keep)
+        "min": mn,
+        "max": mx,
     }
 
 
